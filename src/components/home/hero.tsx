@@ -2,7 +2,7 @@ import { ChevronDown } from 'lucide-react';
 import WaitlistForm from '@/components/home/waitlist-form';
 
 const linkClassName =
-  'inline-flex min-h-11 items-center rounded-sm text-base underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4';
+  'inline-flex min-h-11 items-center rounded-sm text-base focus-visible:outline-2 focus-visible:outline-offset-4';
 
 const navigationLinkClassName =
   `${linkClassName} text-white focus-visible:outline-white max-[760px]:text-[#27275f] max-[760px]:focus-visible:outline-[#5659b4]`;

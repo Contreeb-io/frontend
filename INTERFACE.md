@@ -13,4 +13,4 @@ The reference is the supplied 2880 × 2048 screenshot, treated as a 1440 × 1024
 - At widths up to 1024px, the image is sized to 88% of the hero height so it extends behind the fade without a visible lower edge. At 760px and below, it is sized to 66% of the hero height, the header switches to a disclosure menu, and the content returns to document flow with a viewport-based gap above it.
 - At widths below 640px, the waitlist controls stack and fill their container.
 
-The layout and form styling are scoped to the hero. Shared Button, Input, and other page components retain their existing styles.
+The layout uses Tailwind utilities in the hero and form components. Shared Button, Input, and other page components retain their existing styles.

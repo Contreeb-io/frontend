@@ -26,7 +26,7 @@ export default function Trust() {
     <section id="about" className="font-outfit relative isolate flex min-h-80 w-full items-center justify-center overflow-hidden bg-white px-5 py-20 sm:min-h-102.5 sm:px-8 sm:py-28 lg:min-h-145 lg:py-32">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 [background-size:56px_56px] sm:[background-size:clamp(64px,8.4vw,120px)_80px]"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-50 [background-size:56px_56px] sm:[background-size:clamp(64px,8.4vw,120px)_80px]"
         style={{
           backgroundImage:
             'linear-gradient(to right, #E2E2E2 1px, transparent 1px), linear-gradient(to bottom, #E2E2E2 1px, transparent 1px)',
@@ -35,7 +35,7 @@ export default function Trust() {
             'linear-gradient(to bottom, transparent, black 15%, black 80%, transparent)',
         }}
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-90">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-[0.45]">
         <DotGrid
           dotSize={5}
           baseColor="#3E4793"

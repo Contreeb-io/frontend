@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import WaitlistForm from '@/components/home/waitlist-form';
 
@@ -59,8 +60,24 @@ function NavigationLinks() {
 }
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const closeDropdownsOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+
+      heroRef.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach((details) => {
+        if (!details.contains(target)) details.open = false;
+      });
+    };
+
+    document.addEventListener('pointerdown', closeDropdownsOnOutsidePointer);
+    return () => document.removeEventListener('pointerdown', closeDropdownsOnOutsidePointer);
+  }, []);
+
   return (
-    <section id="home" aria-labelledby="hero-heading" className="relative isolate min-h-svh overflow-hidden bg-[#5256a8] text-white">
+    <section ref={heroRef} id="home" aria-labelledby="hero-heading" className="relative isolate min-h-svh overflow-hidden bg-[#5256a8] text-white">
       <div aria-hidden="true" className={backgroundClassName} />
       <div aria-hidden="true" className={tintClassName} />
       <div aria-hidden="true" className={gradientClassName} />

@@ -1,0 +1,251 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #5256a8;
+  color: #fff;
+}
+
+.background,
+.imageTint,
+.gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.background {
+  z-index: -3;
+  background-image: url('/hero-image.jpg');
+  background-repeat: no-repeat;
+  background-size: 110% auto;
+  background-position: 35% -8svh;
+  filter: blur(1px) saturate(1.12) brightness(1.08);
+}
+
+.imageTint {
+  z-index: -2;
+  background: linear-gradient(90deg, rgb(88 76 178 / 58%), rgb(82 95 167 / 35%) 54%, rgb(68 107 176 / 42%));
+}
+
+.gradient {
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgb(36 46 117 / 6%) 0%,
+    rgb(53 54 140 / 22%) 25%,
+    rgb(66 58 143 / 62%) 42%,
+    rgb(72 71 158 / 88%) 55%,
+    rgb(72 71 158 / 97%) 70%,
+    #5256a8 100%
+  );
+}
+
+.header {
+  position: relative;
+  z-index: 2;
+  padding: 48px clamp(32px, 5.55vw, 80px) 0;
+}
+
+.headerInner {
+  display: flex;
+  width: 100%;
+  max-width: 1760px;
+  margin-inline: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.logo {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.navigationLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.6vw, 40px);
+}
+
+.trustItem {
+  position: relative;
+}
+
+.trustLinks {
+  position: absolute;
+  z-index: 3;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  padding: 8px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 16px;
+  background: #4b4dbc;
+  box-shadow: 0 16px 36px rgb(18 20 75 / 25%);
+}
+
+.mobileNavigation {
+  display: none;
+}
+
+.content {
+  position: absolute;
+  z-index: 1;
+  top: 57.5%;
+  left: 50%;
+  width: min(calc(100% - 48px), 900px);
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(50px, 4.86vw, 70px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.description {
+  max-width: 600px;
+  margin: 24px auto 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+@media (max-width: 1024px) {
+  .background {
+    background-size: auto 88%;
+    background-position: center -8svh;
+  }
+
+  .header {
+    padding-inline: 32px;
+  }
+
+  .content {
+    width: min(calc(100% - 64px), 800px);
+  }
+
+  .title {
+    font-size: clamp(44px, 5.2vw, 60px);
+  }
+}
+
+@media (max-width: 760px) {
+  .background {
+    background-size: auto 66%;
+    background-position: center top;
+  }
+
+  .gradient {
+    background: linear-gradient(
+      to bottom,
+      rgb(36 46 117 / 12%) 0%,
+      rgb(53 54 140 / 38%) 27%,
+      rgb(72 71 158 / 88%) 48%,
+      #5256a8 70%
+    );
+  }
+
+  .header {
+    padding: 28px 24px 0;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .desktopNavigation {
+    display: none;
+  }
+
+  .mobileNavigation {
+    position: relative;
+    display: block;
+  }
+
+  .mobileMenuToggle {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    list-style: none;
+  }
+
+  .mobileMenuToggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobileMenuToggle:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
+  .mobileNavigation[open] .mobileMenuToggle svg {
+    transform: rotate(180deg);
+  }
+
+  .mobileMenu {
+    position: absolute;
+    z-index: 3;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(280px, calc(100vw - 48px));
+    padding: 8px 16px;
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 16px;
+    background: #4b4dbc;
+    box-shadow: 0 16px 36px rgb(18 20 75 / 25%);
+  }
+
+  .navigationLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .trustLinks {
+    position: static;
+    width: 100%;
+    margin-bottom: 8px;
+    box-shadow: none;
+  }
+
+  .content {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(calc(100% - 48px), 560px);
+    margin: clamp(260px, 35svh, 330px) auto 0;
+    padding-bottom: 64px;
+    transform: none;
+  }
+
+  .title {
+    font-size: clamp(38px, 9.2vw, 54px);
+    line-height: 1.08;
+  }
+
+  .description {
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenuToggle svg {
+    transition: none;
+  }
+}

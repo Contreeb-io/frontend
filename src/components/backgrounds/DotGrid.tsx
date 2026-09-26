@@ -20,22 +20,42 @@ const throttle = (func: (event: MouseEvent) => void, limit: number) => {
 interface Dot {
   cx: number;
   cy: number;
-  moveX: number;
-  moveY: number;
+  targetX: number;
+  targetY: number;
+  moveSpeed: number;
   xOffset: number;
   yOffset: number;
   _inertiaApplied: boolean;
 }
 
-const createDot = (cx: number, cy: number, index: number): Dot => ({
-  cx,
-  cy,
-  moveX: (index % 2 === 0 ? 1 : -1) * (45 + (index % 5) * 11),
-  moveY: (index % 3 === 0 ? -1 : 1) * (36 + (index % 4) * 9),
-  xOffset: 0,
-  yOffset: 0,
-  _inertiaApplied: false,
-});
+const setRandomDestination = (dot: Dot, width: number, height: number, radius: number) => {
+  const minDistance = Math.hypot(width, height) * 0.3;
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const targetX = radius + Math.random() * (width - radius * 2);
+    const targetY = radius + Math.random() * (height - radius * 2);
+    if (Math.hypot(targetX - dot.cx, targetY - dot.cy) >= minDistance || attempt === 19) {
+      dot.targetX = targetX;
+      dot.targetY = targetY;
+      dot.moveSpeed = 42 + Math.random() * 36;
+      return;
+    }
+  }
+};
+
+const createDot = (cx: number, cy: number, width: number, height: number, radius: number): Dot => {
+  const dot: Dot = {
+    cx,
+    cy,
+    targetX: cx,
+    targetY: cy,
+    moveSpeed: 0,
+    xOffset: 0,
+    yOffset: 0,
+    _inertiaApplied: false,
+  };
+  setRandomDestination(dot, width, height, radius);
+  return dot;
+};
 
 export interface DotGridProps {
   positions?: readonly (readonly [number, number])[];
@@ -143,11 +163,11 @@ const DotGrid: React.FC<DotGridProps> = ({
       for (let x = 0; x < cols; x++) {
         const cx = startX + x * cell;
         const cy = startY + y * cell;
-        dots.push(createDot(cx, cy, dots.length));
+        dots.push(createDot(cx, cy, width, height, dotSize / 2));
       }
     }
     dotsRef.current = positions
-      ? positions.map(([x, y], index) => createDot(x * width, y * height, index))
+      ? positions.map(([x, y]) => createDot(x * width, y * height, width, height, dotSize / 2))
       : dots;
   }, [dotSize, gap, positions]);
 
@@ -176,23 +196,17 @@ const DotGrid: React.FC<DotGridProps> = ({
 
       dotsRef.current.forEach((dot) => {
         if (shouldMove && width > dotSize && height > dotSize) {
-          dot.cx += dot.moveX * delta;
-          dot.cy += dot.moveY * delta;
-
-          if (dot.cx < radius) {
-            dot.cx = 2 * radius - dot.cx;
-            dot.moveX = Math.abs(dot.moveX);
-          } else if (dot.cx > width - radius) {
-            dot.cx = 2 * (width - radius) - dot.cx;
-            dot.moveX = -Math.abs(dot.moveX);
-          }
-
-          if (dot.cy < radius) {
-            dot.cy = 2 * radius - dot.cy;
-            dot.moveY = Math.abs(dot.moveY);
-          } else if (dot.cy > height - radius) {
-            dot.cy = 2 * (height - radius) - dot.cy;
-            dot.moveY = -Math.abs(dot.moveY);
+          const dx = dot.targetX - dot.cx;
+          const dy = dot.targetY - dot.cy;
+          const distance = Math.hypot(dx, dy);
+          const step = dot.moveSpeed * delta;
+          if (distance <= step) {
+            dot.cx = dot.targetX;
+            dot.cy = dot.targetY;
+            setRandomDestination(dot, width, height, radius);
+          } else {
+            dot.cx += dx / distance * step;
+            dot.cy += dy / distance * step;
           }
         }
 

@@ -60,7 +60,7 @@ export default function Faqs() {
           <AccordionItem
             key={id}
             value={id}
-            className="overflow-hidden rounded-3xl border-0 bg-[#F9F3E9] text-[#171717] not-last:border-b-0"
+            className="overflow-hidden rounded-3xl border-0 bg-white text-[#171717] not-last:border-b-0"
           >
             <AccordionTrigger className="group min-h-[68px] items-center gap-5 rounded-3xl px-5 py-5 text-base font-normal hover:no-underline focus-visible:ring-inset sm:px-6 [&>svg]:hidden!">
               {question}

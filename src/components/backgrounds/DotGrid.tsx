@@ -20,10 +20,42 @@ const throttle = (func: (event: MouseEvent) => void, limit: number) => {
 interface Dot {
   cx: number;
   cy: number;
+  targetX: number;
+  targetY: number;
+  moveSpeed: number;
   xOffset: number;
   yOffset: number;
   _inertiaApplied: boolean;
 }
+
+const setRandomDestination = (dot: Dot, width: number, height: number, radius: number) => {
+  const minDistance = Math.hypot(width, height) * 0.3;
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const targetX = radius + Math.random() * (width - radius * 2);
+    const targetY = radius + Math.random() * (height - radius * 2);
+    if (Math.hypot(targetX - dot.cx, targetY - dot.cy) >= minDistance || attempt === 19) {
+      dot.targetX = targetX;
+      dot.targetY = targetY;
+      dot.moveSpeed = 21 + Math.random() * 18;
+      return;
+    }
+  }
+};
+
+const createDot = (cx: number, cy: number, width: number, height: number, radius: number): Dot => {
+  const dot: Dot = {
+    cx,
+    cy,
+    targetX: cx,
+    targetY: cy,
+    moveSpeed: 0,
+    xOffset: 0,
+    yOffset: 0,
+    _inertiaApplied: false,
+  };
+  setRandomDestination(dot, width, height, radius);
+  return dot;
+};
 
 export interface DotGridProps {
   positions?: readonly (readonly [number, number])[];
@@ -38,6 +70,7 @@ export interface DotGridProps {
   maxSpeed?: number;
   resistance?: number;
   returnDuration?: number;
+  autoMove?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -65,12 +98,14 @@ const DotGrid: React.FC<DotGridProps> = ({
   maxSpeed = 5000,
   resistance = 750,
   returnDuration = 1.5,
+  autoMove = false,
   className = '',
   style
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dotsRef = useRef<Dot[]>([]);
+  const boundsRef = useRef({ width: 0, height: 0 });
   const pointerRef = useRef({
     x: -Infinity,
     y: -Infinity,
@@ -99,6 +134,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     if (!wrap || !canvas) return;
 
     const { width, height } = wrap.getBoundingClientRect();
+    boundsRef.current = { width, height };
     const dpr = window.devicePixelRatio || 1;
 
     canvas.width = width * dpr;
@@ -127,11 +163,11 @@ const DotGrid: React.FC<DotGridProps> = ({
       for (let x = 0; x < cols; x++) {
         const cx = startX + x * cell;
         const cy = startY + y * cell;
-        dots.push({ cx, cy, xOffset: 0, yOffset: 0, _inertiaApplied: false });
+        dots.push(createDot(cx, cy, width, height, dotSize / 2));
       }
     }
     dotsRef.current = positions
-      ? positions.map(([x, y]) => ({ cx: x * width, cy: y * height, xOffset: 0, yOffset: 0, _inertiaApplied: false }))
+      ? positions.map(([x, y]) => createDot(x * width, y * height, width, height, dotSize / 2))
       : dots;
   }, [dotSize, gap, positions]);
 
@@ -139,6 +175,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     if (!circlePath) return;
 
     let rafId = 0;
+    let previousFrame = performance.now();
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const proxSq = proximity * proximity;
 
@@ -150,12 +187,33 @@ const DotGrid: React.FC<DotGridProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x: px, y: py } = pointerRef.current;
+      const now = performance.now();
+      const delta = Math.min((now - previousFrame) / 1000, 0.05);
+      previousFrame = now;
+      const shouldMove = autoMove && !motion.matches;
+      const { width, height } = boundsRef.current;
+      const radius = dotSize / 2;
 
-      for (const dot of dotsRef.current) {
+      dotsRef.current.forEach((dot) => {
+        if (shouldMove && width > dotSize && height > dotSize) {
+          const dx = dot.targetX - dot.cx;
+          const dy = dot.targetY - dot.cy;
+          const distance = Math.hypot(dx, dy);
+          const step = dot.moveSpeed * delta;
+          if (distance <= step) {
+            dot.cx = dot.targetX;
+            dot.cy = dot.targetY;
+            setRandomDestination(dot, width, height, radius);
+          } else {
+            dot.cx += dx / distance * step;
+            dot.cy += dy / distance * step;
+          }
+        }
+
         const ox = dot.cx + dot.xOffset;
         const oy = dot.cy + dot.yOffset;
-        const dx = dot.cx - px;
-        const dy = dot.cy - py;
+        const dx = ox - px;
+        const dy = oy - py;
         const dsq = dx * dx + dy * dy;
 
         let style = baseColor;
@@ -173,7 +231,7 @@ const DotGrid: React.FC<DotGridProps> = ({
         ctx.fillStyle = style;
         ctx.fill(circlePath);
         ctx.restore();
-      }
+      });
 
       if (!motion.matches) rafId = requestAnimationFrame(draw);
     };
@@ -188,7 +246,7 @@ const DotGrid: React.FC<DotGridProps> = ({
       observer.disconnect();
       motion.removeEventListener('change', redraw);
     };
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
+  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, autoMove, dotSize]);
 
   useEffect(() => {
     buildGrid();

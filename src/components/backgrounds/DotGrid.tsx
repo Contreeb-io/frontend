@@ -36,7 +36,7 @@ const setRandomDestination = (dot: Dot, width: number, height: number, radius: n
     if (Math.hypot(targetX - dot.cx, targetY - dot.cy) >= minDistance || attempt === 19) {
       dot.targetX = targetX;
       dot.targetY = targetY;
-      dot.moveSpeed = 42 + Math.random() * 36;
+      dot.moveSpeed = 21 + Math.random() * 18;
       return;
     }
   }

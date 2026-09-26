@@ -38,6 +38,7 @@ export interface DotGridProps {
   maxSpeed?: number;
   resistance?: number;
   returnDuration?: number;
+  autoBounce?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -65,6 +66,7 @@ const DotGrid: React.FC<DotGridProps> = ({
   maxSpeed = 5000,
   resistance = 750,
   returnDuration = 1.5,
+  autoBounce = false,
   className = '',
   style
 }) => {
@@ -150,10 +152,19 @@ const DotGrid: React.FC<DotGridProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x: px, y: py } = pointerRef.current;
+      const elapsed = performance.now() / 1000;
+      const shouldBounce = autoBounce && !motion.matches;
 
-      for (const dot of dotsRef.current) {
-        const ox = dot.cx + dot.xOffset;
-        const oy = dot.cy + dot.yOffset;
+      dotsRef.current.forEach((dot, index) => {
+        const phase = index * 1.618;
+        const bounceX = shouldBounce
+          ? Math.sin(elapsed * (1.1 + (index % 4) * 0.12) + phase) * 4
+          : 0;
+        const bounceY = shouldBounce
+          ? Math.abs(Math.sin(elapsed * (2.5 + (index % 3) * 0.14) + phase)) * (8 + (index % 4) * 2)
+          : 0;
+        const ox = dot.cx + dot.xOffset + bounceX;
+        const oy = dot.cy + dot.yOffset - bounceY;
         const dx = dot.cx - px;
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
@@ -173,7 +184,7 @@ const DotGrid: React.FC<DotGridProps> = ({
         ctx.fillStyle = style;
         ctx.fill(circlePath);
         ctx.restore();
-      }
+      });
 
       if (!motion.matches) rafId = requestAnimationFrame(draw);
     };
@@ -188,7 +199,7 @@ const DotGrid: React.FC<DotGridProps> = ({
       observer.disconnect();
       motion.removeEventListener('change', redraw);
     };
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
+  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, autoBounce]);
 
   useEffect(() => {
     buildGrid();

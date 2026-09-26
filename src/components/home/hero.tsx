@@ -22,7 +22,6 @@ const trustLinksClassName =
 function NavigationLinks() {
   return (
     <ul className="flex items-center gap-[clamp(20px,2.6vw,40px)] max-[760px]:flex-col max-[760px]:items-stretch max-[760px]:gap-0">
-      <li><a href="#about" className={navigationLinkClassName}>About</a></li>
       <li><a href="#faqs" className={navigationLinkClassName}>FAQs</a></li>
       <li><a href="#contact" className={navigationLinkClassName}>Contact</a></li>
       <li className="relative">

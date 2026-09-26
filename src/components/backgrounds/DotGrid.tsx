@@ -38,7 +38,7 @@ export interface DotGridProps {
   maxSpeed?: number;
   resistance?: number;
   returnDuration?: number;
-  autoBounce?: boolean;
+  autoMove?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -66,7 +66,7 @@ const DotGrid: React.FC<DotGridProps> = ({
   maxSpeed = 5000,
   resistance = 750,
   returnDuration = 1.5,
-  autoBounce = false,
+  autoMove = false,
   className = '',
   style
 }) => {
@@ -153,20 +153,22 @@ const DotGrid: React.FC<DotGridProps> = ({
 
       const { x: px, y: py } = pointerRef.current;
       const elapsed = performance.now() / 1000;
-      const shouldBounce = autoBounce && !motion.matches;
+      const shouldMove = autoMove && !motion.matches;
 
       dotsRef.current.forEach((dot, index) => {
         const phase = index * 1.618;
-        const bounceX = shouldBounce
-          ? Math.sin(elapsed * (1.1 + (index % 4) * 0.12) + phase) * 4
+        const driftX = shouldMove
+          ? Math.sin(elapsed * (0.95 + (index % 4) * 0.15) + phase) * 16
+            + Math.sin(elapsed * (0.37 + (index % 3) * 0.04) + phase * 1.7) * 5
           : 0;
-        const bounceY = shouldBounce
-          ? Math.abs(Math.sin(elapsed * (2.5 + (index % 3) * 0.14) + phase)) * (8 + (index % 4) * 2)
+        const driftY = shouldMove
+          ? Math.cos(elapsed * (1.13 + (index % 3) * 0.11) + phase * 0.8) * 14
+            + Math.sin(elapsed * (0.29 + (index % 4) * 0.03) + phase * 1.2) * 5
           : 0;
-        const ox = dot.cx + dot.xOffset + bounceX;
-        const oy = dot.cy + dot.yOffset - bounceY;
-        const dx = dot.cx - px;
-        const dy = dot.cy - py;
+        const ox = dot.cx + dot.xOffset + driftX;
+        const oy = dot.cy + dot.yOffset + driftY;
+        const dx = ox - px;
+        const dy = oy - py;
         const dsq = dx * dx + dy * dy;
 
         let style = baseColor;
@@ -199,7 +201,7 @@ const DotGrid: React.FC<DotGridProps> = ({
       observer.disconnect();
       motion.removeEventListener('change', redraw);
     };
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, autoBounce]);
+  }, [proximity, baseColor, activeRgb, baseRgb, circlePath, autoMove]);
 
   useEffect(() => {
     buildGrid();

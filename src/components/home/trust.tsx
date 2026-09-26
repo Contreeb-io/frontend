@@ -37,7 +37,7 @@ export default function Trust() {
       />
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-[0.45]">
         <DotGrid
-          autoBounce
+          autoMove
           dotSize={5}
           baseColor="#3E4793"
           activeColor="#3E4793"

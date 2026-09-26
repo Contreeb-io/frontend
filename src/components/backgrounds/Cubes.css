@@ -1,0 +1,48 @@
+.cubes {
+  width: min(82vw, 720px);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.cubes-scene {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: var(--cubes-gap);
+  perspective: 900px;
+  touch-action: pan-y;
+}
+
+.cubes-cell {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.cubes-face {
+  position: absolute;
+  inset: 0;
+  border: var(--cubes-border);
+  background: var(--cubes-face);
+  backface-visibility: hidden;
+}
+
+.cubes-face--top {
+  transform: translateY(-50%) rotateX(90deg);
+}
+
+.cubes-face--bottom {
+  transform: translateY(50%) rotateX(-90deg);
+}
+
+.cubes-face--left {
+  transform: translateX(-50%) rotateY(-90deg);
+}
+
+.cubes-face--right {
+  transform: translateX(50%) rotateY(90deg);
+}
+
+.cubes-face--front,
+.cubes-face--back {
+  transform: rotateY(-90deg) translateX(50%) rotateY(90deg);
+}

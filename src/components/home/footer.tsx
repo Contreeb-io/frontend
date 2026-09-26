@@ -22,7 +22,7 @@ export default function Footer({
   ];
 
   return (
-    <footer className="font-inter relative isolate min-h-[306px] overflow-hidden bg-[#F9F3E9] px-5 pt-20 pb-16 text-sm leading-5 text-[#27252D] sm:px-8 sm:pt-28 lg:px-14">
+    <footer className="font-inter relative isolate min-h-[306px] overflow-hidden bg-[#FFFEFC] px-5 pt-20 pb-16 text-sm leading-5 text-[#27252D] sm:px-8 sm:pt-28 lg:px-14">
       {imageSrc && (
         <img
           src={imageSrc}

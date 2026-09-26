@@ -45,9 +45,9 @@ export default function WaitlistForm() {
       aria-label="Join the waitlist"
       aria-busy={joinWaitlist.isPending}
       onSubmit={form.handleSubmit(onSubmit)}
-      className="font-inter mx-auto mt-5 w-full max-w-[440px] text-left"
+      className="font-inter mx-auto mt-5 w-full max-w-[520px] text-left"
     >
-      <div className="flex flex-col items-start gap-3 sm:flex-row">
+      <div className="flex flex-col items-start gap-4 sm:flex-row">
         <Controller
           name="email"
           control={form.control}
@@ -75,7 +75,7 @@ export default function WaitlistForm() {
                   field.onChange(event);
                   joinWaitlist.reset();
                 }}
-                className="h-12 rounded-full border-white/70 bg-white/10 px-4 text-base text-white placeholder:text-white/85 focus-visible:border-white focus-visible:ring-white/30 aria-invalid:border-red-200 sm:text-sm"
+                className="h-14 rounded-full border-white/80 bg-white/5 px-5 text-base text-white placeholder:text-white/85 focus-visible:border-white focus-visible:ring-white/30 aria-invalid:border-red-200"
               />
               {fieldState.invalid && (
                 <FieldError
@@ -95,7 +95,7 @@ export default function WaitlistForm() {
               ? 'Joining the waitlist'
               : 'Join the waitlist'
           }
-          className="h-12 w-full shrink-0 rounded-full bg-white px-6 text-sm font-medium text-[#6360F0] hover:bg-white/90 focus-visible:ring-white/50 sm:w-auto"
+          className="h-14 w-full shrink-0 rounded-full bg-white px-7 text-base font-medium text-[#6260EE] hover:bg-white/90 focus-visible:ring-white/50 sm:w-auto"
         >
           {joinWaitlist.isPending ? 'Joining…' : 'Join the waitlist'}
         </Button>

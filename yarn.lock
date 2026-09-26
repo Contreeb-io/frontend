@@ -1448,6 +1448,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"agentation@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "agentation@npm:3.1.2"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/8f68480d2b9d1d04fc3d9fdda5a5af6689f68ed6dc4abad3af4753bfdc0d5a6ddd8ff8a34c1081a8eb69697d58d90dfe017844bc216d67db4c4107eb8c0b72f9
+  languageName: node
+  linkType: hard
+
 "ajv-formats@npm:^2.1.1":
   version: 2.1.1
   resolution: "ajv-formats@npm:2.1.1"
@@ -1825,6 +1840,7 @@ __metadata:
     "@types/react": "npm:^19.2.18"
     "@types/react-dom": "npm:^19.2.7"
     "@vitejs/plugin-react": "npm:^6.1.1"
+    agentation: "npm:^3.1.2"
     class-variance-authority: "npm:^0.7.1"
     cn: "npm:^0.3.0"
     eslint: "npm:^10.10.0"

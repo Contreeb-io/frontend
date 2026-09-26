@@ -10,7 +10,7 @@ export default function Review() {
   return (
     <section
       aria-labelledby="review-heading"
-      className="bg-[#FFFEFC] px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
+      className="bg-white px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-8 lg:gap-12">
         <div className="w-full max-w-md">

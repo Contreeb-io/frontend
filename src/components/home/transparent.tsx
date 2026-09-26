@@ -2,7 +2,7 @@ export default function Transparent() {
   return (
     <section
       aria-labelledby="transparent-heading"
-      className="bg-[#FFFEFC] px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
+      className="bg-white px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
     >
       <div className="mx-auto min-h-56 max-w-7xl sm:min-h-64">
         <div className="w-full max-w-md">

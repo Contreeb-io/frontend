@@ -11,7 +11,7 @@ export default function Verified() {
   return (
     <section
       aria-labelledby="verified-heading"
-      className="bg-[#FFFEFC] px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
+      className="bg-white px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-12 lg:gap-16">
         <div className="w-full max-w-md">

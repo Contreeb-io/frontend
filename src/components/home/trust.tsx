@@ -23,7 +23,7 @@ const dotPositions = [
 
 export default function Trust() {
   return (
-    <section id="about" className="font-outfit relative isolate flex min-h-80 w-full items-center justify-center overflow-hidden bg-[#FFFEFC] px-5 py-20 sm:min-h-102.5 sm:px-8 sm:py-28 lg:min-h-145 lg:py-32">
+    <section id="about" className="font-outfit relative isolate flex min-h-80 w-full items-center justify-center overflow-hidden bg-white px-5 py-20 sm:min-h-102.5 sm:px-8 sm:py-28 lg:min-h-145 lg:py-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 [background-size:56px_56px] sm:[background-size:clamp(64px,8.4vw,120px)_80px]"

@@ -110,8 +110,8 @@ export default function Hero() {
         </div>
       </header>
 
-      <div className="absolute top-[57.5%] left-1/2 z-30 w-[calc(100%_-_48px)] max-w-[900px] -translate-x-1/2 text-center max-[1024px]:w-[calc(100%_-_64px)] max-[1024px]:max-w-[800px] max-[760px]:relative max-[760px]:top-auto max-[760px]:left-auto max-[760px]:mx-auto max-[760px]:mt-[clamp(260px,35svh,330px)] max-[760px]:w-[calc(100%_-_48px)] max-[760px]:max-w-[560px] max-[760px]:translate-x-0 max-[760px]:pb-16">
-        <h1 id="hero-heading" className="font-outfit m-0 text-[clamp(50px,4.86vw,70px)] leading-[1.06] font-medium tracking-[-0.035em] max-[1024px]:text-[clamp(44px,5.2vw,60px)] max-[760px]:text-[clamp(38px,9.2vw,54px)] max-[760px]:leading-[1.08]">
+      <div className="absolute top-[57.5%] left-1/2 z-30 w-[calc(100%_-_48px)] max-w-[1100px] -translate-x-1/2 text-center max-[1024px]:w-[calc(100%_-_64px)] max-[1024px]:max-w-[800px] max-[760px]:relative max-[760px]:top-auto max-[760px]:left-auto max-[760px]:mx-auto max-[760px]:mt-[clamp(260px,35svh,330px)] max-[760px]:w-[calc(100%_-_48px)] max-[760px]:max-w-[560px] max-[760px]:translate-x-0 max-[760px]:pb-16">
+        <h1 id="hero-heading" className="font-outfit m-0 text-[clamp(50px,5.56vw,80px)] leading-[1.06] font-medium tracking-[-0.035em] max-[1024px]:text-[clamp(44px,5.2vw,60px)] max-[760px]:text-[clamp(38px,9.2vw,54px)] max-[760px]:leading-[1.08]">
           Raise funds with confidence.
         </h1>
         <p className="font-inter mx-auto mt-6 max-w-[600px] text-lg leading-[1.55] text-pretty max-[760px]:text-base">

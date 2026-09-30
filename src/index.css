@@ -139,3 +139,25 @@
     font-optical-sizing: auto;
   }
 }
+
+.reasons-track {
+  --reasons-card-width: min(700px, 72vw);
+  --reasons-gap: clamp(14px, 1.7vw, 24px);
+  display: flex;
+  width: max-content;
+  gap: var(--reasons-gap);
+  margin-left: calc(0px - var(--reasons-card-width) - var(--reasons-gap));
+  animation: reasons-scroll 40s linear infinite;
+}
+
+@keyframes reasons-scroll {
+  to {
+    transform: translateX(calc(0px - var(--reasons-card-width) - var(--reasons-card-width) - var(--reasons-card-width) - var(--reasons-gap) - var(--reasons-gap) - var(--reasons-gap)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reasons-track {
+    animation: none;
+  }
+}

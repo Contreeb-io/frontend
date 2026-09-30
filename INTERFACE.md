@@ -6,8 +6,8 @@ The reference is the supplied 2880 × 2048 screenshot, treated as a 1440 × 1024
 
 - The hero fills at least `100svh`. Its header and content are independent layers above the photograph, tint, and vertical fade.
 - The desktop header starts 48px from the top and about 80px from each side at 1440px. Its inner width is capped at 1760px. The logo is 200px wide.
-- Desktop content is centered in a 900px container, with its top at 57.5% of the hero height. The heading remains on one line at the reference width.
-- The heading uses Outfit, weight 500, a 1.06 line height, and a size that reaches 70px at desktop widths. The paragraph uses Inter at 18px with a 600px maximum width; it wraps to three lines at 1440px.
+- Desktop content is centered in an 1100px container, with its top at 57.5% of the hero height. The heading remains on one line at the reference width.
+- The heading uses Outfit, weight 500, a 1.06 line height, and reaches 80px at 1440px. The paragraph uses Inter at 18px with a 600px maximum width; it wraps to three lines at 1440px.
 - The waitlist row has a 520px maximum width, a 16px gap, and 56px tall controls. Its input grows within the row and its button uses content width with 28px horizontal padding.
 - The existing `/hero-image.jpg` is positioned at 35% horizontally and 8svh above the hero, sized to 110% of the hero width. A slight blur, saturation, and brightness adjustment softens the image. A separate lateral blue/violet tint and a vertical gradient fade it into `#5256a8` before the main text.
 - At widths up to 1024px, the image is sized to 88% of the hero height so it extends behind the fade without a visible lower edge. At 760px and below, it is sized to 66% of the hero height, the header switches to a disclosure menu, and the content returns to document flow with a viewport-based gap above it.
@@ -28,6 +28,7 @@ The layout uses Tailwind utilities in the hero and form components. Shared Butto
 
 ## Reasons to care
 
-- The new section sits between the hero and trust introduction. Its three 700 × 570px image cards are centered in a single strip at the 1440px reference width, with 24px gaps and 40px corners. The outer cards crop beyond the viewport and fade toward its edges.
+- The section sits after Campaign Review. Its 700 × 570px image cards form a continuously scrolling strip at the 1440px reference width, with 24px gaps and 40px corners. A duplicate set of three cards makes the loop seamless; the viewport edges fade the passing cards.
 - The heading and paragraph use Outfit and Inter respectively, with generous spacing below the images. At smaller widths, the center card scales to 72vw so both neighboring cards remain visible.
 - The education and celebration images match the supplied reference. The care image is a freely licensed alternative to the watermarked image in that reference. Photo sources: [education](https://unsplash.com/photos/woman-carrying-white-and-green-textbook-iQPr1XkF5F0), [celebration](https://unsplash.com/photos/time-lapse-photography-of-two-women-splashing-glitters-LO1lToLGGFA), [care](https://unsplash.com/photos/doctor-comforting-patient-with-a-hand-on-arm-E0xu1n9yiPk).
+- The carousel stops for visitors who request reduced motion. The Transparent Fundraising section has been removed from the homepage.

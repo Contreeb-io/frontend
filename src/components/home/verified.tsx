@@ -1,49 +1,64 @@
-import VerifiedCreatorCard from '@/components/home/verified-creator-card';
+import TrustFeature from './trust-feature';
 
-const cardPositions = [
-  'left-[8%] top-[14%] -rotate-[17deg]',
-  'right-0 top-[10%] rotate-[5deg]',
-  'left-0 top-[58%] rotate-[5deg]',
-  'right-[15%] top-[50%] rotate-[5deg]',
-];
+type VerificationCardProps = {
+  state: 'verified' | 'pending';
+  className: string;
+};
+
+function StatusMark({ complete }: { complete: boolean }) {
+  return complete ? (
+    <span className="verification-card__mark verification-card__mark--complete">
+      <img src="/trust/check.svg" alt="" width="12" height="12" />
+    </span>
+  ) : <span className="verification-card__mark verification-card__mark--pending" />;
+}
+
+function VerificationCard({ state, className }: VerificationCardProps) {
+  const complete = state === 'verified';
+
+  return (
+    <div className={`verification-card ${className}`}>
+      <div className="verification-card__header">
+        <div>
+          <p className="verification-card__title">Community Education Fund</p>
+          <div className="verification-card__creator">
+            <img src="/trust/ama-mensah.png" alt="" width="32" height="32" />
+            <div>
+              <p>Ama Mensah</p>
+              <small>Campaign creator</small>
+            </div>
+          </div>
+        </div>
+        <img src={complete ? '/trust/seal-check-alt.svg' : '/trust/circle-dashed.svg'} alt="" width="32" height="32" />
+      </div>
+      <div className="verification-card__divider"><img src="/trust/card-divider.svg" alt="" width="400" height="1" /></div>
+      <div className="verification-card__statuses">
+        <div><span>Identity check</span><span><StatusMark complete />Campaign creator</span></div>
+        <div><span>Verification</span><span><StatusMark complete={complete} />Details verified</span></div>
+        <div><span>Campaign status</span><span><StatusMark complete={complete} />Ready to receive donations</span></div>
+      </div>
+    </div>
+  );
+}
 
 export default function Verified() {
   return (
-    <section
-      aria-labelledby="verified-heading"
-      className="bg-white px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
+    <TrustFeature
+      id="verified-heading"
+      variant="verification"
+      title="Know who's behind the campaign"
+      description="For campaigns that require verification, creators confirm their identity before funds can be received. A verified status helps donors understand when those checks have been completed."
     >
-      <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-12 lg:gap-16">
-        <div className="w-full max-w-md">
-          <h2
-            id="verified-heading"
-            className="font-outfit max-w-[14ch] text-[clamp(2rem,4vw,3rem)] leading-[1.15] font-semibold tracking-tight text-[#0A0A0A]"
-          >
-            Verified Campaign Creators
-          </h2>
-          <p className="font-inter mt-3 max-w-[28ch] text-lg leading-[1.5] text-[#737373] sm:text-xl lg:text-[22px]">
-            Campaign creators may be asked to verify their identity before
-            receiving donations.
-          </p>
-        </div>
-        <div
-          role="img"
-          aria-label="Illustration of four verified campaign creator profiles"
-          className="@container relative mx-auto aspect-[440/260] w-full max-w-[560px]"
-        >
-          <div aria-hidden="true">
-            {cardPositions.map((position) => (
-              <VerifiedCreatorCard
-                key={position}
-                name="Kwame Bio"
-                age={24}
-                className={`absolute w-[42%] ${position}`}
-                avatarSrc="/avatar.jpg"
-              />
-            ))}
-          </div>
-        </div>
+      <div className="verification-visual">
+        <VerificationCard state="pending" className="verification-card--top-back" />
+        <VerificationCard state="verified" className="verification-card--main" />
+        <VerificationCard state="pending" className="verification-card--right" />
+        <VerificationCard state="pending" className="verification-card--left" />
+        <VerificationCard state="verified" className="verification-card--lower" />
+        <div className="verification-visual__fade-left" />
+        <div className="verification-visual__fade-right" />
+        <div className="verification-visual__fade-bottom" />
       </div>
-    </section>
+    </TrustFeature>
   );
 }

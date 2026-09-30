@@ -14,3 +14,14 @@ The reference is the supplied 2880 × 2048 screenshot, treated as a 1440 × 1024
 - At widths below 640px, the waitlist controls stack and fill their container.
 
 The layout uses Tailwind utilities in the hero and form components. Shared Button, Input, and other page components retain their existing styles.
+
+## Trust and safety narrative
+
+- The verification, payment, and review sections share a 1,283px editorial grid on a `#fcfcfc` surface. At the 1,440px Figma frame width, the copy column is 514px, the gap is 64px, and the visual column is 705px.
+- Headings use Outfit Semibold at 40px with a 1.2 line height. Descriptions use Inter Regular at 24px with a 1.5 line height and `#737373` text.
+- The visual hierarchy is decorative and hidden from the accessibility tree. All feature meaning remains in the semantic heading and description.
+- Verification cards use a 434px white surface, 24px radius, 16px padding, a subtle border and shadow, and a `#f7f7f7` status panel. The primary card is sharp; surrounding cards use varied opacity, blur, clipping, and edge fades.
+- Payments uses three overlapping notification surfaces above the Figma dashed orbits. The foreground card stays sharp; the two cards behind it fade and blur. The Figma money icon and lock remain local SVG assets.
+- Review uses Figma's 156 × 176px document artwork in four columns and three rows, with 27px column gaps and 38px row gaps. Reviewed documents receive the Figma seal; neutral/background documents use lower opacities.
+- Below 900px the sections stack copy above visuals. Below 650px verification keeps one readable primary card, payment condenses its foreground card, and review changes to two document columns.
+- Assets are stored in `public/trust/`; Figma SVG root dimensions remain intact. The designs introduce no animation.

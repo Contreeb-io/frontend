@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="MoneyWavy">
+<g id="Vector">
+</g>
+<path id="Vector_2" opacity="0.2" d="M4 17.3025V47.3025C26.91 36.11 37.09 57.89 60 46.6975V16.6975C37.09 27.89 26.91 6.11 4 17.3025ZM32 38C30.8133 38 29.6533 37.6481 28.6666 36.9888C27.6799 36.3295 26.9108 35.3925 26.4567 34.2961C26.0026 33.1997 25.8838 31.9933 26.1153 30.8295C26.3468 29.6656 26.9182 28.5965 27.7574 27.7574C28.5965 26.9182 29.6656 26.3468 30.8295 26.1153C31.9933 25.8838 33.1997 26.0026 34.2961 26.4567C35.3925 26.9108 36.3295 27.6799 36.9888 28.6666C37.6481 29.6533 38 30.8133 38 32C38 33.5913 37.3679 35.1174 36.2426 36.2426C35.1174 37.3679 33.5913 38 32 38Z" fill="#2563EB"/>
+<path id="Vector_3" d="M60 46.6975C37.09 57.89 26.91 36.11 4 47.3025V17.3025C26.91 6.11 37.09 27.89 60 16.6975V46.6975Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M32 38C35.3137 38 38 35.3137 38 32C38 28.6863 35.3137 26 32 26C28.6863 26 26 28.6863 26 32C26 35.3137 28.6863 38 32 38Z" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M12 24V36" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M52 28V40" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

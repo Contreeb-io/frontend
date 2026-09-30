@@ -1,52 +1,36 @@
-import { LockKeyhole } from 'lucide-react';
+import TrustFeature from './trust-feature';
 
-type SecureProps = {
-  imageSrc?: string;
-};
-
-export default function Secure({ imageSrc }: SecureProps) {
+function PaymentNotification({ className }: { className: string }) {
   return (
-    <section
-      aria-labelledby="secure-heading"
-      className="bg-white px-5 py-6 sm:px-8 sm:py-8 lg:px-14 lg:py-10"
+    <div className={`payment-notification ${className}`}>
+      <span className="payment-notification__icon">
+        <img src="/trust/money-wavy.svg" alt="" width="64" height="64" />
+      </span>
+      <span className="payment-notification__details">
+        <strong>Payment received</strong>
+        <span>12th May, 2026</span>
+      </span>
+      <span className="payment-notification__amount">GHS 500</span>
+    </div>
+  );
+}
+
+export default function Secure() {
+  return (
+    <TrustFeature
+      id="secure-heading"
+      variant="payment"
+      title="Secure Payments"
+      description="Donations are processed through trusted payment partners using secure payment infrastructure."
     >
-      <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-8 lg:gap-12">
-        <div className="w-full max-w-md">
-          <h2
-            id="secure-heading"
-            className="font-outfit text-[clamp(2rem,4vw,3rem)] leading-[1.15] font-semibold tracking-tight text-[#0A0A0A]"
-          >
-            Secure Payments
-          </h2>
-          <p className="font-inter mt-3 max-w-[25ch] text-lg leading-[1.5] text-[#737373] sm:text-xl lg:text-[22px]">
-            Donations are processed through trusted payment partners using
-            secure payment infrastructure.
-          </p>
-        </div>
-        <div
-          aria-hidden="true"
-          className="mx-auto flex aspect-[560/340] w-full max-w-[640px] items-center justify-center"
-        >
-          {imageSrc ? (
-            <img
-              src={imageSrc}
-              alt=""
-              width={520}
-              height={300}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-contain"
-            />
-          ) : (
-            <div className="flex size-28 items-center justify-center rounded-full bg-[#EDE6DA] sm:size-36">
-              <LockKeyhole
-                className="size-12 text-[#737373] sm:size-16"
-                strokeWidth={1.25}
-              />
-            </div>
-          )}
-        </div>
+      <div className="payment-visual">
+        <img className="payment-visual__orbit payment-visual__orbit--left" src="/trust/ellipse-15.png" alt="" width="285" height="540" />
+        <img className="payment-visual__orbit payment-visual__orbit--right" src="/trust/ellipse-16.png" alt="" width="285" height="540" />
+        <PaymentNotification className="payment-notification--back" />
+        <PaymentNotification className="payment-notification--middle" />
+        <PaymentNotification className="payment-notification--front" />
+        <img className="payment-visual__lock" src="/trust/lock-key.svg" alt="" width="120" height="120" />
       </div>
-    </section>
+    </TrustFeature>
   );
 }

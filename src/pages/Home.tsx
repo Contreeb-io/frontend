@@ -14,7 +14,7 @@ function Home() {
         <Hero />
         <Trust />
         <Verified />
-        <Secure imageSrc="/secure.png" />
+        <Secure />
         <Review />
         <Transparent />
         <Faqs />

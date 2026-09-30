@@ -25,3 +25,9 @@ The layout uses Tailwind utilities in the hero and form components. Shared Butto
 - Review uses Figma's 156 × 176px document artwork in four columns and three rows, with 27px column gaps and 38px row gaps. Reviewed documents receive the Figma seal; neutral/background documents use lower opacities.
 - Below 900px the sections stack copy above visuals. Below 650px verification keeps one readable primary card, payment condenses its foreground card, and review changes to two document columns.
 - Assets are stored in `public/trust/`; Figma SVG root dimensions remain intact. The designs introduce no animation.
+
+## Reasons to care
+
+- The new section sits between the hero and trust introduction. Its three 700 × 570px image cards are centered in a single strip at the 1440px reference width, with 24px gaps and 40px corners. The outer cards crop beyond the viewport and fade toward its edges.
+- The heading and paragraph use Outfit and Inter respectively, with generous spacing below the images. At smaller widths, the center card scales to 72vw so both neighboring cards remain visible.
+- The education and celebration images match the supplied reference. The care image is a freely licensed alternative to the watermarked image in that reference. Photo sources: [education](https://unsplash.com/photos/woman-carrying-white-and-green-textbook-iQPr1XkF5F0), [celebration](https://unsplash.com/photos/time-lapse-photography-of-two-women-splashing-glitters-LO1lToLGGFA), [care](https://unsplash.com/photos/doctor-comforting-patient-with-a-hand-on-arm-E0xu1n9yiPk).

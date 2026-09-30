@@ -2,6 +2,7 @@ import Faqs from '@/components/home/faqs';
 import Footer from '@/components/home/footer';
 import Hero from '@/components/home/hero';
 import Review from '@/components/home/review';
+import Reasons from '@/components/home/reasons';
 import Secure from '@/components/home/secure';
 import Transparent from '@/components/home/transparent';
 import Trust from '@/components/home/trust';
@@ -12,6 +13,7 @@ function Home() {
     <>
       <main>
         <Hero />
+        <Reasons />
         <Trust />
         <Verified />
         <Secure />

@@ -1,10 +1,10 @@
-import { Plus } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Plus } from 'lucide-react';
 
 const questions = [
   {
@@ -38,17 +38,18 @@ export default function Faqs() {
     <section
       id="faqs"
       aria-labelledby="faqs-heading"
-      className="font-outfit flex flex-col items-center justify-center gap-8 bg-[#0070FF] bg-[url('/faqs.png')] bg-cover bg-center bg-no-repeat px-5 py-16 text-center text-[#F9F3E9] bg-blend-multiply sm:px-8 sm:py-20 lg:px-14"
+      className="font-outfit flex flex-col items-center justify-center gap-8 bg-[#FCFCFC] px-5 py-16 text-center sm:px-8 sm:py-20 lg:px-14"
     >
       <div className="w-full max-w-250 space-y-4">
         <h2
           id="faqs-heading"
-          className="text-[clamp(2rem,5vw,3.5rem)] leading-[1.15] font-medium tracking-tight text-balance"
+          className="text-[#0A0A0A] text-[clamp(2rem,5vw,3.5rem)] leading-[1.15] font-medium tracking-tight text-balance"
         >
           Frequently Asked Questions
         </h2>
-        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-pretty sm:text-2xl">
-          Learn more about fundraising and supporting campaigns on Contreebute.
+        <p className="text-[#525252] mx-auto max-w-2xl text-lg leading-relaxed text-pretty sm:text-2xl">
+          Quick answers about Offloop, agent work, integrations, and
+          control.{' '}
         </p>
       </div>
 
@@ -60,9 +61,9 @@ export default function Faqs() {
           <AccordionItem
             key={id}
             value={id}
-            className="overflow-hidden rounded-3xl border-0 bg-white text-[#171717] not-last:border-b-0"
+            className="overflow-hidden rounded-3xl border-0 bg-white not-last:border-b-0"
           >
-            <AccordionTrigger className="group min-h-[68px] items-center gap-5 rounded-3xl px-5 py-5 text-base font-normal hover:no-underline focus-visible:ring-inset sm:px-6 [&>svg]:hidden!">
+            <AccordionTrigger className="group min-h-[68px] text-[#1A1A1A] items-center gap-5 rounded-3xl px-5 py-5 text-base font-normal hover:no-underline focus-visible:ring-inset sm:px-6 [&>svg]:hidden!">
               {question}
               <span aria-hidden="true" className="shrink-0">
                 <Plus
@@ -71,20 +72,20 @@ export default function Faqs() {
                 />
               </span>
             </AccordionTrigger>
-            <AccordionContent className="px-5 pt-0 pb-5 text-sm leading-relaxed text-[#333333] sm:px-6 sm:text-base">
+            <AccordionContent className="px-5 pt-0 pb-5 text-sm leading-relaxed text-[#2D2D2D] sm:px-6 sm:text-base">
               {answer}
             </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
 
-      <div id="contact" className="space-y-2 text-lg sm:text-xl">
+      <div id="contact" className="space-y-2 text-lg sm:text-xl text-[#404040]">
         <p>Still need help? Reach out to us</p>
         <a
-          href="mailto:admin@contreebute.app"
+          href="mailto:help@contreebute.app"
           className="inline-flex min-h-11 items-center rounded-sm font-medium underline decoration-dotted decoration-1 underline-offset-4 hover:decoration-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
         >
-          admin@contreebute.app
+          help@contreebute.app
         </a>
       </div>
     </section>

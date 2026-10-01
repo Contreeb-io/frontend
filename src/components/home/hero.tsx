@@ -77,7 +77,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} id="home" aria-labelledby="hero-heading" className="relative isolate min-h-svh overflow-hidden bg-[#5256a8] text-white">
+    <section ref={heroRef} id="home" aria-labelledby="hero-heading" className="relative isolate min-h-svh min-[761px]:grid min-[761px]:grid-rows-[57.5svh_auto] overflow-hidden bg-[#5256a8] text-white">
       <div aria-hidden="true" className={backgroundClassName} />
       <div aria-hidden="true" className={tintClassName} />
       <div aria-hidden="true" className={gradientClassName} />
@@ -110,7 +110,7 @@ export default function Hero() {
         </div>
       </header>
 
-      <div className="absolute top-[57.5%] left-1/2 z-30 w-[calc(100%_-_48px)] max-w-[1100px] -translate-x-1/2 text-center max-[1024px]:w-[calc(100%_-_64px)] max-[1024px]:max-w-[800px] max-[760px]:relative max-[760px]:top-auto max-[760px]:left-auto max-[760px]:mx-auto max-[760px]:mt-[clamp(260px,35svh,330px)] max-[760px]:w-[calc(100%_-_48px)] max-[760px]:max-w-[560px] max-[760px]:translate-x-0 max-[760px]:pb-16">
+      <div className="relative z-30 mx-auto w-[calc(100%_-_48px)] max-w-[1100px] pb-16 text-center max-[1024px]:w-[calc(100%_-_64px)] max-[1024px]:max-w-[800px] max-[760px]:relative max-[760px]:top-auto max-[760px]:left-auto max-[760px]:mx-auto max-[760px]:mt-[clamp(260px,35svh,330px)] max-[760px]:w-[calc(100%_-_48px)] max-[760px]:max-w-[560px] max-[760px]:translate-x-0 max-[760px]:pb-16">
         <h1 id="hero-heading" className="font-outfit m-0 text-[clamp(50px,5.56vw,80px)] leading-[1.06] font-medium tracking-[-0.035em] max-[1024px]:text-[clamp(44px,5.2vw,60px)] max-[760px]:text-[clamp(38px,9.2vw,54px)] max-[760px]:leading-[1.08]">
           Raise funds with confidence.
         </h1>

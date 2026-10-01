@@ -26,10 +26,13 @@ export default function Secure() {
       <div className="payment-visual">
         <img className="payment-visual__orbit payment-visual__orbit--left" src="/trust/ellipse-15.png" alt="" width="285" height="540" />
         <img className="payment-visual__orbit payment-visual__orbit--right" src="/trust/ellipse-16.png" alt="" width="285" height="540" />
-        <PaymentNotification className="payment-notification--back" />
-        <PaymentNotification className="payment-notification--middle" />
-        <PaymentNotification className="payment-notification--front" />
-        <img className="payment-visual__lock" src="/trust/lock-key.svg" alt="" width="120" height="120" />
+        <div className="payment-visual__stack">
+          <PaymentNotification className="payment-notification--oldest" />
+          <PaymentNotification className="payment-notification--back" />
+          <PaymentNotification className="payment-notification--middle" />
+          <PaymentNotification className="payment-notification--front" />
+        </div>
+        <img className="payment-visual__lock" src="/trust/lock-key.svg" alt="" width="72" height="72" />
       </div>
     </TrustFeature>
   );

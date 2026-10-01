@@ -175,11 +175,13 @@ const DotGrid: React.FC<DotGridProps> = ({
     if (!circlePath) return;
 
     let rafId = 0;
+    let isVisible = true;
     let previousFrame = performance.now();
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const proxSq = proximity * proximity;
 
     const draw = () => {
+      if (!isVisible) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -236,15 +238,37 @@ const DotGrid: React.FC<DotGridProps> = ({
       if (!motion.matches) rafId = requestAnimationFrame(draw);
     };
 
-    const redraw = () => { cancelAnimationFrame(rafId); draw(); };
+    const redraw = () => {
+      cancelAnimationFrame(rafId);
+      previousFrame = performance.now();
+      draw();
+    };
     const observer = new ResizeObserver(redraw);
     if (wrapperRef.current) observer.observe(wrapperRef.current);
-    motion.addEventListener('change', redraw);
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) redraw();
+      else cancelAnimationFrame(rafId);
+    });
+    if (wrapperRef.current) visibilityObserver.observe(wrapperRef.current);
+    const onMotionChange = () => {
+      if (motion.matches) {
+        dotsRef.current.forEach((dot) => {
+          gsap.killTweensOf(dot);
+          dot.xOffset = 0;
+          dot.yOffset = 0;
+          dot._inertiaApplied = false;
+        });
+      }
+      redraw();
+    };
+    motion.addEventListener('change', onMotionChange);
     draw();
     return () => {
       cancelAnimationFrame(rafId);
       observer.disconnect();
-      motion.removeEventListener('change', redraw);
+      visibilityObserver.disconnect();
+      motion.removeEventListener('change', onMotionChange);
     };
   }, [proximity, baseColor, activeRgb, baseRgb, circlePath, autoMove, dotSize]);
 
@@ -265,8 +289,11 @@ const DotGrid: React.FC<DotGridProps> = ({
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const surface = wrapperRef.current;
+    if (!surface) return;
     const onMove = (e: MouseEvent) => {
-      if (motion.matches) return;
+      if (motion.matches || !finePointer.matches) return;
       const now = performance.now();
       const pr = pointerRef.current;
       const dt = pr.lastTime ? now - pr.lastTime : 16;
@@ -320,7 +347,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
 
     const onClick = (e: MouseEvent) => {
-      if (motion.matches) return;
+      if (motion.matches || !finePointer.matches) return;
       const rect = canvasRef.current!.getBoundingClientRect();
       if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
       const cx = e.clientX - rect.left;
@@ -350,12 +377,18 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
 
     const throttledMove = throttle(onMove, 50);
-    window.addEventListener('mousemove', throttledMove, { passive: true });
-    window.addEventListener('click', onClick);
+    const onLeave = () => {
+      pointerRef.current.x = -Infinity;
+      pointerRef.current.y = -Infinity;
+    };
+    surface.addEventListener('mousemove', throttledMove, { passive: true });
+    surface.addEventListener('mouseleave', onLeave);
+    surface.addEventListener('click', onClick);
 
     return () => {
-      window.removeEventListener('mousemove', throttledMove);
-      window.removeEventListener('click', onClick);
+      surface.removeEventListener('mousemove', throttledMove);
+      surface.removeEventListener('mouseleave', onLeave);
+      surface.removeEventListener('click', onClick);
       dotsRef.current.forEach(dot => gsap.killTweensOf(dot));
     };
   }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength]);

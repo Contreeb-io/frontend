@@ -1,4 +1,4 @@
-import { toast } from '@/components/ui/toast';
+import { toast } from '@/components/ui/toast-manager';
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
 

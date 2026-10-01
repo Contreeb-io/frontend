@@ -48,8 +48,8 @@ export default function Faqs() {
           Frequently Asked Questions
         </h2>
         <p className="text-[#525252] mx-auto max-w-2xl text-lg leading-relaxed text-pretty sm:text-2xl">
-          Quick answers about Offloop, agent work, integrations, and
-          control.{' '}
+          Quick answers about campaigns, verification, donations, and getting
+          support.
         </p>
       </div>
 
@@ -68,7 +68,7 @@ export default function Faqs() {
               <span aria-hidden="true" className="shrink-0">
                 <Plus
                   strokeWidth={1.5}
-                  className="size-5 transition-transform duration-200 group-aria-expanded:rotate-45 motion-reduce:transition-none"
+                  className="size-5 transition-transform duration-200 ease-[var(--ease-out)] group-aria-expanded:rotate-45 motion-reduce:transition-none"
                 />
               </span>
             </AccordionTrigger>

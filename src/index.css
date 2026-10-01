@@ -49,6 +49,7 @@
 }
 
 :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -150,6 +151,33 @@
   animation: reasons-scroll 40s linear infinite;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .reasons-viewport:hover .reasons-track {
+    animation-play-state: paused;
+  }
+}
+
+.waitlist-submit {
+  transition: transform 160ms var(--ease-out), background-color 160ms ease;
+}
+
+.waitlist-submit[data-pointer-pressed="true"] {
+  transform: scale(0.97);
+}
+
+[data-slot="accordion-content"] {
+  animation-timing-function: var(--ease-out);
+}
+
+#home summary:focus-visible svg,
+[data-slot="accordion-trigger"]:focus-visible svg {
+  transition: none;
+}
+
+[data-slot="accordion-item"]:has([data-slot="accordion-trigger"]:focus-visible) [data-slot="accordion-content"] {
+  animation: none;
+}
+
 @keyframes reasons-scroll {
   to {
     transform: translateX(calc(0px - var(--reasons-card-width) - var(--reasons-card-width) - var(--reasons-card-width) - var(--reasons-gap) - var(--reasons-gap) - var(--reasons-gap)));
@@ -159,5 +187,23 @@
 @media (prefers-reduced-motion: reduce) {
   .reasons-track {
     animation: none;
+  }
+
+  .waitlist-submit {
+    transition: background-color 160ms ease;
+  }
+
+  .waitlist-submit[data-pointer-pressed="true"] {
+    transform: none;
+  }
+
+  [data-slot="toast"] {
+    transition: opacity 150ms ease;
+  }
+
+  [data-slot="toast"][data-starting-style],
+  [data-slot="toast"][data-ending-style] {
+    opacity: 0;
+    transform: none;
   }
 }

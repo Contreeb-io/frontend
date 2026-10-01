@@ -13,7 +13,7 @@ export default function Reasons() {
       aria-labelledby="reasons-heading"
       className="overflow-hidden bg-[#fcfcfc] pt-[clamp(96px,13.2vw,190px)] pb-[clamp(110px,14vw,200px)]"
     >
-      <div aria-hidden="true" className="w-full [mask-image:linear-gradient(to_right,transparent,black_25%,black_75%,transparent)] max-[1400px]:[mask-image:linear-gradient(to_right,transparent,black_14%,black_86%,transparent)]">
+      <div aria-hidden="true" className="reasons-viewport w-full [mask-image:linear-gradient(to_right,transparent,black_25%,black_75%,transparent)] max-[1400px]:[mask-image:linear-gradient(to_right,transparent,black_14%,black_86%,transparent)]">
         <div className="mx-auto w-[min(700px,72vw)]">
           <div className="reasons-track">
             {[...images, ...images].map((image, index) => (

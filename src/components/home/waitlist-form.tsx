@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { toast } from '@/components/ui/toast';
+import { toast } from '@/components/ui/toast-manager';
 import http from '@/lib/https';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -90,12 +90,24 @@ export default function WaitlistForm() {
         <Button
           type="submit"
           isLoading={joinWaitlist.isPending}
+          onPointerDown={(event) => {
+            event.currentTarget.dataset.pointerPressed = 'true';
+          }}
+          onPointerUp={(event) => {
+            delete event.currentTarget.dataset.pointerPressed;
+          }}
+          onPointerCancel={(event) => {
+            delete event.currentTarget.dataset.pointerPressed;
+          }}
+          onPointerLeave={(event) => {
+            delete event.currentTarget.dataset.pointerPressed;
+          }}
           aria-label={
             joinWaitlist.isPending
               ? 'Joining the waitlist'
               : 'Join the waitlist'
           }
-          className="h-14 w-full shrink-0 rounded-full bg-white px-7 text-base font-medium text-[#6260EE] hover:bg-white/90 focus-visible:ring-white/50 sm:w-auto"
+          className="waitlist-submit h-14 w-full shrink-0 rounded-full bg-white px-7 text-base font-medium text-[#6260EE] hover:bg-white/90 focus-visible:ring-white/50 sm:w-auto"
         >
           {joinWaitlist.isPending ? 'Joining…' : 'Join the waitlist'}
         </Button>

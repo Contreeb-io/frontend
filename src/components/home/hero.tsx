@@ -31,7 +31,7 @@ function NavigationLinks() {
             Trust and safety
             <ChevronDown
               aria-hidden="true"
-              className="size-4 transition-transform group-open/trust:rotate-180 motion-reduce:transition-none"
+              className="size-4 transition-transform duration-150 ease-[var(--ease-out)] group-open/trust:rotate-180 motion-reduce:transition-none"
             />
           </summary>
           <ul className={trustLinksClassName}>
@@ -72,8 +72,30 @@ export default function Hero() {
       });
     };
 
+    const closeDropdownOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      const openDetails = Array.from(
+        heroRef.current?.querySelectorAll<HTMLDetailsElement>('details[open]') ?? [],
+      );
+      const focusedDetails = document.activeElement instanceof Element
+        ? document.activeElement.closest<HTMLDetailsElement>('details[open]')
+        : null;
+      const details = focusedDetails && heroRef.current?.contains(focusedDetails)
+        ? focusedDetails
+        : openDetails.at(-1);
+      if (!details) return;
+
+      const restoreFocus = details.contains(document.activeElement);
+      details.open = false;
+      if (restoreFocus) details.querySelector('summary')?.focus();
+    };
+
     document.addEventListener('pointerdown', closeDropdownsOnOutsidePointer);
-    return () => document.removeEventListener('pointerdown', closeDropdownsOnOutsidePointer);
+    document.addEventListener('keydown', closeDropdownOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', closeDropdownsOnOutsidePointer);
+      document.removeEventListener('keydown', closeDropdownOnEscape);
+    };
   }, []);
 
   return (
@@ -93,7 +115,7 @@ export default function Hero() {
           <details className="group/menu relative hidden max-[760px]:block">
             <summary className="font-inter inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white [&::-webkit-details-marker]:hidden">
               Menu
-              <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open/menu:rotate-180 motion-reduce:transition-none" />
+              <ChevronDown aria-hidden="true" className="size-4 transition-transform duration-150 ease-[var(--ease-out)] group-open/menu:rotate-180 motion-reduce:transition-none" />
             </summary>
             <nav
               aria-label="Mobile navigation"
